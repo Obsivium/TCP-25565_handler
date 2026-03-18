@@ -1,0 +1,114 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Voxel Portal</title>
+    <link rel="stylesheet" href="/styles.css" />
+  </head>
+  <body>
+    <div class="app-shell">
+      <aside class="sidebar">
+        <h1>Voxel Portal</h1>
+        <p class="lede">Sign in with your Microsoft account, connect to a block server, and drive your avatar from the browser.</p>
+
+        <form id="connect-form" class="panel stacked">
+          <label>
+            Host
+            <input name="host" placeholder="play.example.net" required />
+          </label>
+          <label>
+            Port
+            <input name="port" type="number" value="25565" min="1" max="65535" />
+          </label>
+          <label>
+            Microsoft account email
+            <input name="username" type="email" placeholder="user@example.com" required />
+          </label>
+          <label>
+            Version (optional)
+            <input name="version" placeholder="Leave blank for auto" />
+          </label>
+          <button type="submit">Connect</button>
+        </form>
+
+        <section class="panel">
+          <h2>Status</h2>
+          <div id="status">Idle</div>
+          <dl class="stats-grid">
+            <div>
+              <dt>Health</dt>
+              <dd id="health">0</dd>
+            </div>
+            <div>
+              <dt>Food</dt>
+              <dd id="food">0</dd>
+            </div>
+            <div>
+              <dt>XP</dt>
+              <dd id="xp">0</dd>
+            </div>
+            <div>
+              <dt>Held</dt>
+              <dd id="held-item">None</dd>
+            </div>
+          </dl>
+          <div id="position">x: -, y: -, z: -</div>
+          <div id="target-block">Target: none</div>
+        </section>
+
+        <section class="panel controls-panel">
+          <h2>Controls</h2>
+          <ul>
+            <li><strong>Move:</strong> W A S D</li>
+            <li><strong>Jump:</strong> Space</li>
+            <li><strong>Sprint:</strong> Shift</li>
+            <li><strong>Sneak:</strong> Ctrl</li>
+            <li><strong>Look:</strong> Drag after clicking the viewer</li>
+            <li><strong>Break:</strong> Left click button</li>
+            <li><strong>Use / open table:</strong> Right click button</li>
+          </ul>
+          <div class="button-row">
+            <button id="break-btn" type="button">Break target</button>
+            <button id="use-btn" type="button">Use target</button>
+          </div>
+        </section>
+
+        <section class="panel">
+          <h2>Inventory</h2>
+          <div id="inventory" class="inventory-list"></div>
+        </section>
+
+        <section class="panel stacked">
+          <h2>Crafting table</h2>
+          <label>
+            Item name
+            <input id="craft-name" list="craftable-list" placeholder="oak_planks" />
+            <datalist id="craftable-list"></datalist>
+          </label>
+          <label>
+            Amount
+            <input id="craft-amount" type="number" value="1" min="1" />
+          </label>
+          <button id="craft-btn" type="button">Craft</button>
+        </section>
+
+        <div id="toast" class="toast hidden"></div>
+      </aside>
+
+      <main class="viewer-shell">
+        <div class="viewer-toolbar">
+          <span>Live view</span>
+          <span id="connection-pill" class="pill">offline</span>
+        </div>
+        <div id="viewer-capture" class="viewer-capture">
+          <iframe id="viewer-frame" title="Live view" src="http://localhost:3001" allow="fullscreen"></iframe>
+          <div class="crosshair">+</div>
+        </div>
+      </main>
+    </div>
+
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="/app.js"></script>
+  </body>
+</html>

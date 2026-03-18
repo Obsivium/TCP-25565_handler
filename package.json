@@ -1,0 +1,16 @@
+{
+  "name": "voxel-portal",
+  "version": "0.1.0",
+  "description": "Browser bridge for a block-world account using mineflayer and Microsoft sign-in.",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "check": "node --check server.js && node --check public/app.js"
+  },
+  "dependencies": {
+    "express": "^4.19.2",
+    "mineflayer": "^4.23.0",
+    "prismarine-viewer": "^1.29.0",
+    "socket.io": "^4.7.5"
+  }
+}
